@@ -4,3 +4,4 @@
  * React.js
  * Material-UI
  * React Router
+ * Material-UI Icons
