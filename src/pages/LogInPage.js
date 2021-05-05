@@ -1,14 +1,18 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
 import LogInComponent from "../components/LogInComponent";
+import FrontTemplate from "../templates/FrontTemplate";
+import AuthService from "../services/AuthService";
 
+function LogInPage(props) {
 
-function LogInPage(props){
+    function handleLogin(mail, username) {
+        AuthService.auth(mail,username)
+    }
 
-    return(
-        <Container maxWidth="lg">
-            <LogInComponent></LogInComponent>
-        </Container>
+    return (
+        <FrontTemplate>
+            <LogInComponent onLogin={handleLogin} toSignup={"/signup"} maxWidth="sm"></LogInComponent>
+        </FrontTemplate>
     );
 }
 
