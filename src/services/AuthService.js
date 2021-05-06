@@ -2,19 +2,6 @@ import {func} from "prop-types";
 
 const AuthService = (function (){
 
-    let authToken = null;
-
-    function isAuth(){
-        return authToken ? true : false;
-    }
-
-    function getAuthToken(){
-        return authToken;
-    }
-    function setAuthToken(authToken){
-        return authToken;
-    }
-
     function createUser(user) {
         return fetch('/register', {
             method: 'POST',
@@ -30,18 +17,18 @@ const AuthService = (function (){
         });
     }
 
-    function getUser() {
-        return fetch('/register', {
-            method: 'POST',
+    function getUser(token) {
+        return fetch('/api/user', {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user),
+                'Authorization' : 'Bearer '+token
+            }
         }).then((response) => {
             if (!response.ok) {
                 throw response.statusText;
             }
-            return response.json();
+            return response.text();
         });
     }
 
@@ -66,7 +53,7 @@ const AuthService = (function (){
     }
 
 
-    return {auth, isAuth, createUser, getAuthToken, setAuthToken}
+    return {auth,  createUser, getUser}
 })();
 
 export default AuthService;
