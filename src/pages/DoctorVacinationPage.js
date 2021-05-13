@@ -4,6 +4,7 @@ import Fab from "@material-ui/core/Fab";
 import QRCodeIcon from "../icons/QRCodeIcon";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import VacinationTable from "../components/VacinationTable";
 
 const useStyles = makeStyles((theme) => ({
     fabButton: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function VacinationPage(props){
+function DoctorVacinationPage(props){
     const classes = useStyles();
 
     return(
@@ -23,6 +24,7 @@ function VacinationPage(props){
                 <br/>
                 <Typography variant="h4" component="h2">Impfungen</Typography>
                 <br/>
+                <VacinationTable></VacinationTable>
             </Container>
             <Fab color="primary" aria-label="scan vaccination" className={classes.fabButton} >
                 <QRCodeIcon fontSize="large"/>
@@ -30,4 +32,4 @@ function VacinationPage(props){
         </React.Fragment>)
 }
 
-export default VacinationPage;
+export default DoctorVacinationPage;

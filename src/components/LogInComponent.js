@@ -9,6 +9,8 @@ import Avatar from '@material-ui/core/Avatar';
 import PropTypes from 'prop-types';
 import SignUpComponent from "./SignUpComponent";
 import {Link} from "react-router-dom";
+import Alert from '@material-ui/lab/Alert';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +35,7 @@ function LogInComponent(props) {
 
     useEffect(() => {
         setShowError(false);
+        setAuthException(null);
     },[])
 
     const {onLogin,toSignup,...args} = props;
@@ -43,6 +46,7 @@ function LogInComponent(props) {
     });
 
     const [showError, setShowError] = useState(false);
+    const [authException, setAuthException] = useState(null);
 
     const classes = useStyles();
 
@@ -51,13 +55,17 @@ function LogInComponent(props) {
         setCredentials({...credentials,[id] : value});
     }
 
-    function handleLogin(event){
+    async function handleLogin(event){
         if(!credentials.mail || !credentials.password) {
             setShowError(true);
             return;
         }
         if(onLogin){
-            onLogin(credentials.mail, credentials.password);
+            try {
+                await onLogin(credentials.mail, credentials.password);
+            } catch(exception){
+                setAuthException(exception);
+            }
         }
     }
 
@@ -101,6 +109,7 @@ function LogInComponent(props) {
                     value={credentials.password}
                     onChange={handleChange}>
                 </TextField>
+                {authException && <Alert severity="warning">{authException}</Alert>}
                 <Button
                     fullWidth
                     color="primary"

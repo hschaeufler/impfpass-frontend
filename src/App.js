@@ -10,7 +10,7 @@ import {
 import SignUpPage from "./pages/SignUpPage";
 import AuthProvider from "./provider/AuthProvider";
 import AuthContext from "./context/AuthContext";
-import VacinationPage from "./pages/VacinationPage";
+import UserVacinationPage from "./pages/VacinationPage";
 import PrivateRoute from "./routes/PrivateRoute";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +33,7 @@ function App() {
 
                 <Switch>
                     <PrivateRoute path={["/", "/vacination"]} exact>
-                        <VacinationPage></VacinationPage>
+                        <UserVacinationPage></UserVacinationPage>
                     </PrivateRoute>:
                     <Route path={["/login"]} component={LogInPage} exact></Route>
                     <Route path={["/signup"]} component={SignUpPage} exact></Route>

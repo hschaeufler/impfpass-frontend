@@ -7,6 +7,7 @@ function PrivateRoute(props) {
 
     const {children, ...args} = props;
     const {isAuth, user, authToken} = useAuth();
+
     useEffect(()=>{
         console.log(user);
         console.log(authToken);

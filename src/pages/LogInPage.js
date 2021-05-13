@@ -7,8 +7,8 @@ function LogInPage(props) {
 
     const {login} = useAuth();
 
-    function handleLogin(mail, username) {
-        login(mail,username)
+    async function handleLogin(mail, username) {
+        return login(mail,username)
     }
 
     return (
