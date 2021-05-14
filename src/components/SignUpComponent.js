@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import LoginIcon from "../icons/LoginIcon";
@@ -13,6 +13,7 @@ import RegisterIcon from "../icons/RegisterIcon";
 import Select from '@material-ui/core/Select';
 import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SignUpComponent(props) {
 
-    const {onSignUp,toLogin, ...args} = props;
+    const {onSignUp, toLogin, ...args} = props;
 
     const [user, setUser] = useState({
         firstName: "",
@@ -52,6 +53,12 @@ function SignUpComponent(props) {
     const classes = useStyles();
 
     const [showError, setShowError] = useState(false);
+    const [authException, setAuthException] = useState(null);
+
+    useEffect(() => {
+        setShowError(false);
+        setAuthException(null);
+    }, [])
 
     function handleChange(e) {
         const {id, value, type, name, checked} = e.target;
@@ -62,27 +69,31 @@ function SignUpComponent(props) {
         setUser({...user, [inputID]: inputVal});
     }
 
-    function validateForm(user){
+    function validateForm(user) {
         const requiredFieldsAreSet = user
             && user.firstName
             && user.lastName
             && user.mail
             && user.password
             && user.place
-            && (!user.isDoctor || user.officeName );
+            && (!user.isDoctor || user.officeName);
 
         return requiredFieldsAreSet;
 
     }
 
-    function handleSignUp(event){
-        if(!validateForm(user)){
+    async function handleSignUp(event) {
+        if (!validateForm(user)) {
             setShowError(true);
             return;
         }
 
-        if(onSignUp){
-            onSignUp(user);
+        if (onSignUp) {
+            try {
+                await onSignUp(user);
+            } catch (exception) {
+                setAuthException(exception);
+            }
         }
     }
 
@@ -108,7 +119,7 @@ function SignUpComponent(props) {
                     id="firstName"
                     onChange={handleChange}
                     value={user.firstName}
-                    error = {showError && !user.firstName}
+                    error={showError && !user.firstName}
                     autocomplete>
                 </TextField>
                 <TextField
@@ -119,7 +130,7 @@ function SignUpComponent(props) {
                     label="Last Name"
                     onChange={handleChange}
                     value={user.lastName}
-                    error = {showError && !user.lastName}
+                    error={showError && !user.lastName}
                     id="lastName"
                     autocomplete>
                 </TextField>
@@ -131,7 +142,7 @@ function SignUpComponent(props) {
                     label="E-Mail"
                     onChange={handleChange}
                     value={user.mail}
-                    error = {showError && !user.mail}
+                    error={showError && !user.mail}
                     id="mail"
                     type="email"
                     autocomplete>
@@ -143,7 +154,7 @@ function SignUpComponent(props) {
                     fullWidth
                     onChange={handleChange}
                     value={user.password}
-                    error = {showError && !user.password}
+                    error={showError && !user.password}
                     label="Password"
                     id="password"
                     type="password">
@@ -165,7 +176,7 @@ function SignUpComponent(props) {
                     fullWidth
                     value={user.officeName}
                     onChange={handleChange}
-                    error = {showError && !user.officeName}
+                    error={showError && !user.officeName}
                     label="Doctor's Office"
                     id="officeName">
                 </TextField>}
@@ -175,12 +186,13 @@ function SignUpComponent(props) {
                         name="place"
                         className={classes.dropDown}
                         value={user.place}
-                        error = {showError && !user.place}
+                        error={showError && !user.place}
                         onChange={handleChange}>
                     <MenuItem value="BW">Baden-Württemberg</MenuItem>
                     <MenuItem value="Bayern">Bayern</MenuItem>
                     <MenuItem value="NRW">Nord-Rhein-Westfalen</MenuItem>
                 </Select>
+                {authException && <Alert severity="warning">{authException}</Alert>}
                 <Button
                     fullWidth
                     color="primary"
@@ -206,7 +218,7 @@ function SignUpComponent(props) {
 }
 
 SignUpComponent.propTypes = {
-    toLogin : PropTypes.string.isRequired
+    toLogin: PropTypes.string.isRequired
 }
 
 

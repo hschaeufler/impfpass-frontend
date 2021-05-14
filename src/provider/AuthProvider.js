@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import AuthContext from "../context/AuthContext"
 import AuthService from "../services/AuthService";
-import {useHistory} from "react-router-dom";
+
 
 function AuthProvider(props) {
 
-    const history = useHistory();
+
     const [authToken, setAuthToken] = useState(null);
     const [user, setUser] = useState(null);
 
@@ -24,7 +24,6 @@ function AuthProvider(props) {
         setAuthToken(currentAuthToken);
         const currentAuthUser =  await AuthService.getUser(currentAuthToken);
         setUser(currentAuthUser);
-        history.push("/");
     }
 
 
