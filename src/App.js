@@ -10,8 +10,9 @@ import {
 import SignUpPage from "./pages/SignUpPage";
 import AuthProvider from "./provider/AuthProvider";
 import AuthContext from "./context/AuthContext";
-import UserVacinationPage from "./pages/VacinationPage";
+import UserVacinationPage from "./pages/UserVacinationPage";
 import PrivateRoute from "./routes/PrivateRoute";
+
 
 const useStyles = makeStyles((theme) => ({
     app: {

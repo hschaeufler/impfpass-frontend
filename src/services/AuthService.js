@@ -3,7 +3,7 @@ import {func} from "prop-types";
 const AuthService = (function (){
 
     function createUser(user) {
-        return fetch('/register', {
+        return fetch('/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const AuthService = (function (){
 
 
     function auth(mail, password) {
-        return fetch('/login', {
+        return fetch('/api/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
