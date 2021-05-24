@@ -1,8 +1,10 @@
-FROM node:latest
+ARG VERSION=latest
+FROM node:${VERSION}
+ARG PORT=3000
 ADD package*.json ./
 RUN npm install
 # Add whole App
 ADD . .
 RUN npm run build
-EXPOSE 3000
-CMD npx serve -s build -l 3000
+EXPOSE ${PORT}
+CMD npx serve -s build -l ${PORT}
