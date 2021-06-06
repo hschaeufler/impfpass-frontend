@@ -10,8 +10,8 @@ import {
 import SignUpPage from "./pages/SignUpPage";
 import AuthProvider from "./provider/AuthProvider";
 import AuthContext from "./context/AuthContext";
-import UserVacinationPage from "./pages/UserVacinationPage";
 import PrivateRoute from "./routes/PrivateRoute";
+import DoctorVacinationPage from "./pages/DoctorVacinationPage";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,10 +31,9 @@ function App() {
             <AuthProvider>
 
                 <CustomAppBar></CustomAppBar>
-
                 <Switch>
-                    <PrivateRoute path={["/", "/vacination"]} exact>
-                        <UserVacinationPage></UserVacinationPage>
+                    <PrivateRoute path={["/", "/vacination", "/vacination/new"]} exact>
+                        <DoctorVacinationPage></DoctorVacinationPage>
                     </PrivateRoute>:
                     <Route path={["/login"]} component={LogInPage} exact></Route>
                     <Route path={["/signup"]} component={SignUpPage} exact></Route>

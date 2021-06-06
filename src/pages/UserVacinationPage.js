@@ -5,6 +5,8 @@ import QRCodeIcon from "../icons/QRCodeIcon";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import VacinationTable from "../components/VacinationTable";
+import {Link, Route} from "react-router-dom";
+import VaccinationDialog from "../components/VaccinationDialog";
 
 const useStyles = makeStyles((theme) => ({
     fabButton: {
@@ -25,8 +27,12 @@ function UserVacinationPage(props){
                 <Typography variant="h4" component="h2">Impfungen</Typography>
                 <br/>
                 <VacinationTable></VacinationTable>
+                <Route path={`/vacination/new`}>
+                    <VaccinationDialog></VaccinationDialog>
+                </Route>
             </Container>
-            <Fab color="primary" aria-label="scan vaccination" className={classes.fabButton} >
+            <Fab component={Link}
+                 to="/vacination/new" color="primary" aria-label="scan vaccination" className={classes.fabButton}>
                 <QRCodeIcon fontSize="large"/>
             </Fab>
         </React.Fragment>)

@@ -28,7 +28,7 @@ const AuthService = (function (){
             if (!response.ok) {
                 throw response.statusText;
             }
-            return response.text();
+            return response.json();
         });
     }
 
