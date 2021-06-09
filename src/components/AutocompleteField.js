@@ -4,9 +4,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function AutocompleteField(props){
-    const {id,options,label,onChange,onChangeSelect,...args} = props;
+    const {id,options,label,onChange,value,onChangeSelect,selectValue,error,...args} = props;
 
-    const [value, setValue] = React.useState("");
+    const [objectValue, setObjectValue] = React.useState("");
     const [inputValue, setInputValue] = React.useState('');
 
     function buildEventObjekt(id, val){
@@ -17,21 +17,24 @@ function AutocompleteField(props){
         return event;
     }
 
-    function handleChange(event, newVal){
-        setValue(newVal);
-        if(onChangeSelect){
-            const eventObj = buildEventObjekt(id,newVal);
-            onChangeSelect(eventObj);
-        }
-    }
+ function handleChange(event, newVal){
+     setObjectValue(newVal);
+     if(onChangeSelect){
+         const eventObj = buildEventObjekt(id,newVal);
+         onChangeSelect(eventObj);
+     }
+   }
+
 
     function handleInputChange(event, newVal){
-        setInputValue(newVal);
         if(onChange){
             const eventObj = buildEventObjekt(id,newVal);
             onChange(eventObj);
+        } else {
+            setInputValue(newVal);
         }
     }
+
 
 
 
@@ -41,9 +44,9 @@ function AutocompleteField(props){
         id={id}
         fullWidth
         freeSolo
-        value={value}
+        value={selectValue ? selectValue: objectValue}
         onChange={handleChange}
-        inputValue={inputValue}
+        inputValue={value ? value : inputValue}
         onInputChange={handleInputChange}
         options={options}
         {...args}
@@ -57,6 +60,7 @@ function AutocompleteField(props){
             margin="normal"
             variant="outlined"
             label={label}
+            error={error}
             {...params}
             fullWidth></FormControlInput>}
     ></Autocomplete>);
@@ -66,9 +70,11 @@ AutocompleteField.propTypes = {
     id : PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
     label: PropTypes.string,
+    onChange: PropTypes.func,
     onChangeSelect: PropTypes.func,
-    inputValue: PropTypes.string,
     value: PropTypes.any,
+    selectValue: PropTypes.any,
+    error: PropTypes.any
 }
 
 

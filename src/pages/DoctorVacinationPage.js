@@ -4,7 +4,7 @@ import Fab from "@material-ui/core/Fab";
 import QRCodeIcon from "../icons/QRCodeIcon";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
-import VacinationTable from "../components/VacinationTable";
+import VaccinationTable from "../components/VaccinationTable";
 import {Link, Route, useHistory} from "react-router-dom";
 import VaccinationDialog from "../components/VaccinationDialog";
 
@@ -31,7 +31,7 @@ function DoctorVacinationPage(props) {
                 <br/>
                 <Typography variant="h4" component="h2">Impfungen</Typography>
                 <br/>
-                <VacinationTable></VacinationTable>
+                <VaccinationTable></VaccinationTable>
                 <Route path={"/vacination/new"}>
                     <VaccinationDialog onClose={handleDialogClose}></VaccinationDialog>
                 </Route>

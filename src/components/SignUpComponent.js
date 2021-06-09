@@ -47,7 +47,7 @@ function SignUpComponent(props) {
         password: "",
         isDoctor: false,
         officeName: "",
-        place: "",
+        location: "",
     });
 
     const classes = useStyles();
@@ -75,7 +75,7 @@ function SignUpComponent(props) {
             && user.lastName
             && user.mail
             && user.password
-            && user.place
+            && user.location
             && (!user.isDoctor || user.officeName);
 
         return requiredFieldsAreSet;
@@ -182,11 +182,11 @@ function SignUpComponent(props) {
                 </TextField>}
                 <Select variant="outlined"
                         fullWidth
-                        id="place"
-                        name="place"
+                        id="location"
+                        name="location"
                         className={classes.dropDown}
-                        value={user.place}
-                        error={showError && !user.place}
+                        value={user.location}
+                        error={showError && !user.location}
                         onChange={handleChange}>
                     <MenuItem value="BW">Baden-Württemberg</MenuItem>
                     <MenuItem value="Bayern">Bayern</MenuItem>

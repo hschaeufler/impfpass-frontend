@@ -30,7 +30,7 @@ function SimpleDialogTitle({id,titleText,onClose,children,...args}) {
 
     return (
         <DialogTitle id={id} disableTypography={true} className={styles.title}>
-            <Typography variant="h6" component="h1" className={styles.titleText}>{children}</Typography>
+            <Typography variant="h5" component="h1" className={styles.titleText}>{children}</Typography>
             <CloseButton className={styles.closeButton} onClick={handleClick}></CloseButton>
         </DialogTitle>
     );
