@@ -1,4 +1,4 @@
-import {Button, DialogActions, DialogContent} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import React, {useContext, useEffect, useState} from 'react';
 import VaccineService from "../services/VaccineService";
 import _ from "lodash";
@@ -7,10 +7,11 @@ import FormControlInput from "./FormControlInput";
 import AutocompleteField from "./AutocompleteField";
 import VaccinationService from "../services/VaccinationService";
 import Alert from "@material-ui/lab/Alert";
+import SimpleDialogStep from "./SimpleDialogStep";
 import PropTypes from "prop-types";
 
 
-function VaccinationDialogStep(props) {
+function VaccinationRegistrationDialogStep(props) {
 
     const {onClose, onVaccination} = props;
 
@@ -44,7 +45,7 @@ function VaccinationDialogStep(props) {
         try {
             const result = await VaccinationService.saveRegistration(vaccination, authToken);
 
-            if(onVaccination){
+            if (onVaccination) {
                 onVaccination(result);
             }
 
@@ -81,52 +82,50 @@ function VaccinationDialogStep(props) {
 
     }, []);
 
+    const dialogActions = <Button autoFocus size="large" onClick={handleSubmit} variant="contained"
+                                   color="primary">Submit</Button>;
+
     return (
-        <React.Fragment>
-            <DialogContent>
-                <AutocompleteField
-                    id="vaccine"
-                    label="Vaccine"
-                    onChangeSelect={handleVaccineChangeSelect}
-                    onChange={handleChange}
-                    value={vaccination.vaccine}
-                    options={_.map(vaccines, (vaccine) => {
-                        vaccine.label = vaccine.name + " - " + vaccine.disease + " - " + vaccine.authorizationHolder;
-                        return vaccine;
-                    })}
-                    error={showError && !vaccination.vaccine}
-                ></AutocompleteField>
-                <AutocompleteField
-                    id="disease"
-                    label="Disease"
-                    error={showError && !vaccination.disease}
-                    onChange={handleChange}
-                    options={diseases}
-                    value={vaccination.disease}
-                    label="Disease"></AutocompleteField>
-                <FormControlInput
-                    id="chargeNumber"
-                    label="Charge Nr."
-                    helperText="Enter Charge Number here"
-                    value={vaccination.chargeNumber}
-                    onChange={handleChange}
-                    margin="normal"
-                    variant="outlined"
-                    error={showError && !vaccination.chargeNumber}
-                    fullWidth></FormControlInput>
-                {error && <Alert severity="warning">{error}</Alert>}
-            </DialogContent>
-            <DialogActions>
-                <Button autoFocus size="large" onClick={handleClose} color="primary">Cancel</Button>
-                <Button autoFocus size="large" onClick={handleSubmit} variant="contained"
-                        color="primary">Submit</Button>
-            </DialogActions>
-        </React.Fragment>);
+        <SimpleDialogStep onClose={handleClose}
+                          dialogActions={dialogActions}>
+            <AutocompleteField
+                id="vaccine"
+                label="Vaccine"
+                onChangeSelect={handleVaccineChangeSelect}
+                onChange={handleChange}
+                value={vaccination.vaccine}
+                options={_.map(vaccines, (vaccine) => {
+                    vaccine.label = vaccine.name + " - " + vaccine.disease + " - " + vaccine.authorizationHolder;
+                    return vaccine;
+                })}
+                error={showError && !vaccination.vaccine}
+            ></AutocompleteField>
+            <AutocompleteField
+                id="disease"
+                label="Disease"
+                error={showError && !vaccination.disease}
+                onChange={handleChange}
+                options={diseases}
+                value={vaccination.disease}
+                label="Disease"></AutocompleteField>
+            <FormControlInput
+                id="chargeNumber"
+                label="Charge Nr."
+                helperText="Enter Charge Number here"
+                value={vaccination.chargeNumber}
+                onChange={handleChange}
+                margin="normal"
+                variant="outlined"
+                error={showError && !vaccination.chargeNumber}
+                fullWidth></FormControlInput>
+            {error && <Alert severity="warning">{error}</Alert>}
+        </SimpleDialogStep>
+    );
 }
 
-VaccinationDialogStep.propTypes = {
+VaccinationRegistrationDialogStep.propTypes = {
     onVaccination: PropTypes.func,
     onClose: PropTypes.func
 }
 
-export default VaccinationDialogStep;
+export default VaccinationRegistrationDialogStep;

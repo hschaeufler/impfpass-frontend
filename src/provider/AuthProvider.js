@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import AuthContext from "../context/AuthContext"
 import AuthService from "../services/AuthService";
+import UserRole from "../enum/UserRole";
 
 
 function AuthProvider(props) {
@@ -19,6 +20,21 @@ function AuthProvider(props) {
         return user && authToken;
     }
 
+    function getRole() {
+        if(user && user.role && user.role === UserRole.Doctor) {
+            return UserRole.Doctor;
+        }
+
+        return UserRole.User;
+    }
+
+    function isRole(role) {
+        if(role === user.role){
+            return true;
+        }
+        return false;
+    }
+
     async function login(mail, password) {
         const currentAuthToken = await AuthService.auth(mail, password);
         setAuthToken(currentAuthToken);
@@ -27,7 +43,7 @@ function AuthProvider(props) {
     }
 
 
-    return (<AuthContext.Provider value={{login, logout, isAuth, user, authToken}}>
+    return (<AuthContext.Provider value={{login, logout, isAuth, user, getRole, isRole, authToken}}>
         {props.children}
     </AuthContext.Provider>);
 }

@@ -12,6 +12,8 @@ import AuthProvider from "./provider/AuthProvider";
 import AuthContext from "./context/AuthContext";
 import PrivateRoute from "./routes/PrivateRoute";
 import DoctorVacinationPage from "./pages/DoctorVacinationPage";
+import UserRole from "./enum/UserRole";
+import UserVacinationPage from "./pages/UserVacinationPage";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
     const classes = useStyles();
-    const {isAuth, user, authToken} = useContext(AuthContext);
+    const {isAuth, user, authToken, getRole, isRole} = useContext(AuthContext);
 
     return (
         <Router>
@@ -33,7 +35,8 @@ function App() {
                 <CustomAppBar></CustomAppBar>
                 <Switch>
                     <PrivateRoute path={["/", "/vacination", "/vacination/new"]} exact>
-                        <DoctorVacinationPage></DoctorVacinationPage>
+                        {isRole(UserRole.User) ? <DoctorVacinationPage></DoctorVacinationPage> :
+                            <UserVacinationPage></UserVacinationPage>}
                     </PrivateRoute>:
                     <Route path={["/login"]} component={LogInPage} exact></Route>
                     <Route path={["/signup"]} component={SignUpPage} exact></Route>

@@ -1,11 +1,11 @@
 import SimpleDialog from "./SimpleDialog";
-import VaccinationDialogStep from "./VaccinationDialogStep";
+import VaccinationRegistrationDialogStep from "./VaccinationRegistrationDialogStep";
 import PropTypes from "prop-types";
 import VaccinationQRCodeDialogStep from "./VaccinationQRCodeDialogStep";
 import {useEffect, useState} from "react";
 
 
-function VaccinationDialog(props){
+function VaccinationRegistrationDialog(props){
 
     const {onClose} = props;
 
@@ -28,14 +28,14 @@ function VaccinationDialog(props){
     return (
         <SimpleDialog {...props} title={"Vaccination"}>
             {!vaccination ?
-                <VaccinationDialogStep onClose={handleClose} onVaccination={handleVaccination}></VaccinationDialogStep>
+                <VaccinationRegistrationDialogStep onClose={handleClose} onVaccination={handleVaccination}></VaccinationRegistrationDialogStep>
                 : <VaccinationQRCodeDialogStep value={vaccination} onClose={handleClose}></VaccinationQRCodeDialogStep>}
         </SimpleDialog>
     );
 }
 
-VaccinationDialog.propTypes = {
+VaccinationRegistrationDialog.propTypes = {
     onClose: PropTypes.func
 }
 
-export default VaccinationDialog;
+export default VaccinationRegistrationDialog;

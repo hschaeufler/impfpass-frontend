@@ -6,7 +6,7 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import VaccinationTable from "../components/VaccinationTable";
 import {Link, Route, useHistory} from "react-router-dom";
-import VaccinationDialog from "../components/VaccinationDialog";
+import VaccinationRegistrationDialog from "../components/VaccinationRegistrationDialog";
 
 const useStyles = makeStyles((theme) => ({
     fabButton: {
@@ -33,7 +33,7 @@ function DoctorVacinationPage(props) {
                 <br/>
                 <VaccinationTable></VaccinationTable>
                 <Route path={"/vacination/new"}>
-                    <VaccinationDialog onClose={handleDialogClose}></VaccinationDialog>
+                    <VaccinationRegistrationDialog onClose={handleDialogClose}></VaccinationRegistrationDialog>
                 </Route>
             </Container>
             <Fab component={Link}

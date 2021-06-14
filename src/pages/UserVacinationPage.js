@@ -5,8 +5,8 @@ import QRCodeIcon from "../icons/QRCodeIcon";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import VaccinationTable from "../components/VaccinationTable";
-import {Link, Route} from "react-router-dom";
-import VaccinationDialog from "../components/VaccinationDialog";
+import {Link, Route, useHistory} from "react-router-dom";
+import VaccinationClaimDialog from "../components/VaccinationClaimDialog";
 
 const useStyles = makeStyles((theme) => ({
     fabButton: {
@@ -19,16 +19,22 @@ const useStyles = makeStyles((theme) => ({
 
 function UserVacinationPage(props){
     const classes = useStyles();
+    const history = useHistory();
+
+    function handleDialogClose(){
+        history.goBack();
+    }
+
 
     return(
         <React.Fragment>
             <Container maxWidth="lg">
                 <br/>
-                <Typography variant="h4" component="h2">Impfungen</Typography>
+                <Typography variant="h4" component="h2">Impfungen Nutzer</Typography>
                 <br/>
                 <VaccinationTable></VaccinationTable>
                 <Route path={`/vacination/new`}>
-                    <VaccinationDialog></VaccinationDialog>
+                    <VaccinationClaimDialog onClose={handleDialogClose}></VaccinationClaimDialog>
                 </Route>
             </Container>
             <Fab component={Link}
