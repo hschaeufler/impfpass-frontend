@@ -1,6 +1,6 @@
 const VaccinationService = (function (){
 
-    function saveRegistration(vaccinationRegistration, token){
+    async function saveRegistration(vaccinationRegistration, token){
         return fetch('/api/vaccination/registration', {
             method: 'POST',
             headers: {
@@ -16,7 +16,7 @@ const VaccinationService = (function (){
         });
     }
 
-    function saveClaim(vaccination, token){
+    async function saveClaim(vaccination, token){
         return fetch('/api/vaccination/claim', {
             method: 'POST',
             headers: {

@@ -6,7 +6,7 @@ import Camera from "./Camera";
 import SwitchCameraIcon from '@material-ui/icons/SwitchCamera';
 
 
-function CameraDialogStep({onClose, ...args}) {
+function CameraDialogStep({onClose, onQRCode,...args}) {
 
     const [cameraSwitchCallback, setCameraSwitchCallback] = useState(() => () => {
     });
@@ -28,7 +28,9 @@ function CameraDialogStep({onClose, ...args}) {
     }
 
     function handleQRCode(qrCode) {
-        console.log(qrCode);
+        if(onQRCode){
+            onQRCode(qrCode);
+        }
     }
 
 
@@ -46,7 +48,7 @@ function CameraDialogStep({onClose, ...args}) {
 }
 
 CameraDialogStep.propTypes = {
-    onVaccination: PropTypes.func,
+    onQRCode: PropTypes.func,
     onClose: PropTypes.func,
 }
 

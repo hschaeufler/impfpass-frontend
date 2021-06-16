@@ -1,19 +1,15 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import LogInPage from "./pages/LogInPage";
 import CustomAppBar from "./components/CustomAppBar";
 import {makeStyles} from "@material-ui/core/styles";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch,} from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
 import AuthProvider from "./provider/AuthProvider";
-import AuthContext from "./context/AuthContext";
-import PrivateRoute from "./routes/PrivateRoute";
-import DoctorVacinationPage from "./pages/DoctorVacinationPage";
+import DoctorVaccinationPage from "./pages/DoctorVaccinationPage";
 import UserRole from "./enum/UserRole";
-import UserVacinationPage from "./pages/UserVacinationPage";
+import UserVaccinationPage from "./pages/UserVaccinationPage";
+import RoutesConstants from "./routes/RoutesConstants";
+import AuthorizedRoute from "./routes/AuthorizedRoute";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
     const classes = useStyles();
-    const {isAuth, user, authToken, getRole, isRole} = useContext(AuthContext);
 
     return (
         <Router>
@@ -34,12 +29,17 @@ function App() {
 
                 <CustomAppBar></CustomAppBar>
                 <Switch>
-                    <PrivateRoute path={["/", "/vacination", "/vacination/new"]} exact>
-                        {isRole(UserRole.User) ? <DoctorVacinationPage></DoctorVacinationPage> :
-                            <UserVacinationPage></UserVacinationPage>}
-                    </PrivateRoute>:
-                    <Route path={["/login"]} component={LogInPage} exact></Route>
-                    <Route path={["/signup"]} component={SignUpPage} exact></Route>
+                    <AuthorizedRoute
+                        path={[RoutesConstants.STANDARD_PATH,
+                            RoutesConstants.VACCINATION_PATH,
+                            RoutesConstants.NEW_VACCINATION_PATH
+                            ]}
+                        role={UserRole.Doctor}
+                        alternateContent={<UserVaccinationPage></UserVaccinationPage>} exact>
+                        <DoctorVaccinationPage></DoctorVaccinationPage>
+                    </AuthorizedRoute>
+                    <Route path={RoutesConstants.LOGIN_PATH} component={LogInPage} exact></Route>
+                    <Route path={RoutesConstants.SIGN_UP_PATH} component={SignUpPage} exact></Route>
                 </Switch>
             </AuthProvider>
         </Router>

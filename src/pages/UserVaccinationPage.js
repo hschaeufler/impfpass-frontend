@@ -6,7 +6,8 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import VaccinationTable from "../components/VaccinationTable";
 import {Link, Route, useHistory} from "react-router-dom";
-import VaccinationRegistrationDialog from "../components/VaccinationRegistrationDialog";
+import VaccinationClaimDialog from "../components/VaccinationClaimDialog";
+import RoutesConstants from "../routes/RoutesConstants";
 
 const useStyles = makeStyles((theme) => ({
     fabButton: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function DoctorVacinationPage(props) {
+function UserVaccinationPage(props){
     const classes = useStyles();
     const history = useHistory();
 
@@ -25,22 +26,23 @@ function DoctorVacinationPage(props) {
         history.goBack();
     }
 
-    return (
+
+    return(
         <React.Fragment>
             <Container maxWidth="lg">
                 <br/>
-                <Typography variant="h4" component="h2">Impfungen</Typography>
+                <Typography variant="h4" component="h2">Impfungen Nutzer</Typography>
                 <br/>
                 <VaccinationTable></VaccinationTable>
-                <Route path={"/vacination/new"}>
-                    <VaccinationRegistrationDialog onClose={handleDialogClose}></VaccinationRegistrationDialog>
+                <Route path={RoutesConstants.NEW_VACCINATION_PATH}>
+                    <VaccinationClaimDialog onClose={handleDialogClose}></VaccinationClaimDialog>
                 </Route>
             </Container>
             <Fab component={Link}
-                 to="/vacination/new" color="primary" aria-label="scan vaccination" className={classes.fabButton}>
+                 to={RoutesConstants.NEW_VACCINATION_PATH} color="primary" aria-label="scan vaccination" className={classes.fabButton}>
                 <QRCodeIcon fontSize="large"/>
             </Fab>
         </React.Fragment>)
 }
 
-export default DoctorVacinationPage;
+export default UserVaccinationPage;
