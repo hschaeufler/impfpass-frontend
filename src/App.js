@@ -5,11 +5,9 @@ import {makeStyles} from "@material-ui/core/styles";
 import {BrowserRouter as Router, Route, Switch,} from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
 import AuthProvider from "./provider/AuthProvider";
-import DoctorVaccinationPage from "./pages/DoctorVaccinationPage";
-import UserRole from "./enum/UserRole";
-import UserVaccinationPage from "./pages/UserVaccinationPage";
+import VaccinationPage from "./pages/VaccinationPage";
 import RoutesConstants from "./routes/RoutesConstants";
-import AuthorizedRoute from "./routes/AuthorizedRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,15 +27,11 @@ function App() {
 
                 <CustomAppBar></CustomAppBar>
                 <Switch>
-                    <AuthorizedRoute
-                        path={[RoutesConstants.STANDARD_PATH,
-                            RoutesConstants.VACCINATION_PATH,
-                            RoutesConstants.NEW_VACCINATION_PATH
-                            ]}
-                        role={UserRole.Doctor}
-                        alternateContent={<UserVaccinationPage></UserVaccinationPage>} exact>
-                        <DoctorVaccinationPage></DoctorVaccinationPage>
-                    </AuthorizedRoute>
+                    <PrivateRoute path={[RoutesConstants.STANDARD_PATH,
+                        RoutesConstants.VACCINATION_PATH,
+                        RoutesConstants.NEW_VACCINATION_PATH,
+                        RoutesConstants.VACCINATION_PATH_WITH_ID
+                    ]} children={<VaccinationPage></VaccinationPage>} exact/>
                     <Route path={RoutesConstants.LOGIN_PATH} component={LogInPage} exact></Route>
                     <Route path={RoutesConstants.SIGN_UP_PATH} component={SignUpPage} exact></Route>
                 </Switch>

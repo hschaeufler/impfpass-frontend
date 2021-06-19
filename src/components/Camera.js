@@ -1,11 +1,11 @@
 import CameraService from "simple-camera-service";
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
-import PropTypes, {func} from "prop-types";
+import PropTypes from "prop-types";
 
 
 const useStyles = makeStyles((theme) => ({
-    video : {
+    video: {
         width: "100%"
     }
 
@@ -16,22 +16,26 @@ function Camera({registerCameraSwitchCallback, onQRCode}) {
     const css = useStyles();
 
     function setVideoStream(stream) {
-        streamRef.current.srcObject = stream;
+        if (stream && streamRef && streamRef.current) {
+            streamRef.current.srcObject = stream;
+        } else {
+            CameraService.stopStream();
+        }
     }
 
     async function cleanUp() {
         CameraService.stopStream();
     }
-    
+
     function handleQRCode(codeString) {
-        if(onQRCode){
+        if (onQRCode) {
             onQRCode(codeString);
         }
     }
 
-    function scanStreamForQRCode(){
-        if(onQRCode){
-            CameraService.scanStreamForQRCode((code)=>{
+    function scanStreamForQRCode() {
+        if (onQRCode) {
+            CameraService.scanStreamForQRCode((code) => {
                 handleQRCode(code.data);
             });
         }
@@ -43,14 +47,14 @@ function Camera({registerCameraSwitchCallback, onQRCode}) {
         setVideoStream(stream);
     }
 
-    async function handleCameraSwitch(){
+    async function handleCameraSwitch() {
         const stream = await CameraService.switchCamera();
         scanStreamForQRCode();
         setVideoStream(stream);
     }
 
     useEffect(() => {
-        if(registerCameraSwitchCallback){
+        if (registerCameraSwitchCallback) {
             registerCameraSwitchCallback(handleCameraSwitch);
         }
         startStream();

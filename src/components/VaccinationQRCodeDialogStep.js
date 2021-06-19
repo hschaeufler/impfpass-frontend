@@ -1,5 +1,5 @@
 import {Button, DialogActions, DialogContent} from "@material-ui/core";
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from "prop-types";
 import QRCode from "./QRCode";
 import {Alert} from "@material-ui/lab";

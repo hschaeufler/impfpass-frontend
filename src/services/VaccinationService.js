@@ -32,7 +32,37 @@ const VaccinationService = (function (){
         });
     }
 
-    return {saveRegistration, saveClaim}
+    async function getVaccinations(token){
+        return fetch('/api/vaccination/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + token
+            }
+        }).then((response) => {
+            if (!response.ok) {
+                throw response.statusText;
+            }
+            return response.json();
+        });
+    }
+
+    async function getVaccination(token, id){
+        return fetch('/api/vaccination/' + id, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + token
+            }
+        }).then((response) => {
+            if (!response.ok) {
+                throw response.statusText;
+            }
+            return response.json();
+        });
+    }
+
+    return {saveRegistration, saveClaim,getVaccinations, getVaccination}
 })();
 
 export default VaccinationService;
