@@ -3,7 +3,7 @@ import {func} from "prop-types";
 const AuthService = (function (){
 
     function createUser(user) {
-        return fetch('/api/register', {
+        return fetch('/userapi/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ const AuthService = (function (){
     }
 
     function getUser(token) {
-        return fetch('/api/user', {
+        return fetch('/userapi/user', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const AuthService = (function (){
 
 
     function auth(mail, password) {
-        return fetch('/api/login', {
+        return fetch('/userapi/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

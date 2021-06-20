@@ -2,7 +2,7 @@
 const VaccineService = (function (){
 
     function getVaccines(token){
-        return fetch('/api/vaccine', {
+        return fetch('/vaccinationapi/vaccine', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

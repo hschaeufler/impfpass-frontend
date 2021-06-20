@@ -1,7 +1,7 @@
 const VaccinationService = (function (){
 
     async function saveRegistration(vaccinationRegistration, token){
-        return fetch('/api/vaccination/registration', {
+        return fetch('/vaccinationapi/vaccination/registration', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ const VaccinationService = (function (){
     }
 
     async function saveClaim(vaccination, token){
-        return fetch('/api/vaccination/claim', {
+        return fetch('/vaccinationapi/vaccination/claim', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const VaccinationService = (function (){
     }
 
     async function getVaccinations(token){
-        return fetch('/api/vaccination/', {
+        return fetch('/vaccinationapi/vaccination/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const VaccinationService = (function (){
     }
 
     async function getVaccination(token, id){
-        return fetch('/api/vaccination/' + id, {
+        return fetch('/vaccinationapi/vaccination/' + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
