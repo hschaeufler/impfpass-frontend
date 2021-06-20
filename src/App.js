@@ -1,7 +1,6 @@
 import React from 'react';
 import LogInPage from "./pages/LogInPage";
 import CustomAppBar from "./components/CustomAppBar";
-import {makeStyles} from "@material-ui/core/styles";
 import {BrowserRouter as Router, Route, Switch,} from "react-router-dom";
 import SignUpPage from "./pages/SignUpPage";
 import AuthProvider from "./provider/AuthProvider";
@@ -10,16 +9,8 @@ import RoutesConstants from "./routes/RoutesConstants";
 import PrivateRoute from "./routes/PrivateRoute";
 
 
-const useStyles = makeStyles((theme) => ({
-    app: {
-        height: "100vh",
-    },
-
-}));
-
-
 function App() {
-    const classes = useStyles();
+
 
     return (
         <Router>

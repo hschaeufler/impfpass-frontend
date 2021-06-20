@@ -8,14 +8,15 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import UserRoleArray from "../enum/UserRoleArray";
 import VaccinationTableHead from "./VaccinationTableHead";
-function VaccinationTable({value,type,...args}) {
+
+function VaccinationTable({value, type, ...args}) {
 
 
     return (
         <TableContainer component={Paper}>
             <Table aria-label="Vaccinations">
                 <VaccinationTableHead type={type}></VaccinationTableHead>
-               <TableBody>
+                <TableBody>
                     {_.sortBy(value, ["timestamp"], ["desc"]).map((vaccination, index) =>
                         <VaccinationTableRow type={type} key={vaccination.uuid ? vaccination.uuid : index}
                                              value={vaccination}/>)}

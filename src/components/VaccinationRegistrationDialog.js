@@ -5,22 +5,22 @@ import VaccinationQRCodeDialogStep from "./VaccinationQRCodeDialogStep";
 import {useEffect, useState} from "react";
 
 
-function VaccinationRegistrationDialog(props){
+function VaccinationRegistrationDialog(props) {
 
     const {onClose} = props;
 
     const [vaccination, setVaccination] = useState(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         setVaccination(null);
-    },[]);
+    }, []);
 
-    function handleVaccination(vaccination){
+    function handleVaccination(vaccination) {
         setVaccination(vaccination);
     }
 
-    function handleClose(){
-        if(onClose){
+    function handleClose() {
+        if (onClose) {
             onClose();
         }
     }
@@ -28,7 +28,8 @@ function VaccinationRegistrationDialog(props){
     return (
         <SimpleDialog {...props} title={"Vaccination"}>
             {!vaccination ?
-                <VaccinationRegistrationDialogStep onClose={handleClose} onVaccination={handleVaccination}></VaccinationRegistrationDialogStep>
+                <VaccinationRegistrationDialogStep onClose={handleClose}
+                                                   onVaccination={handleVaccination}></VaccinationRegistrationDialogStep>
                 : <VaccinationQRCodeDialogStep value={vaccination} onClose={handleClose}></VaccinationQRCodeDialogStep>}
         </SimpleDialog>
     );

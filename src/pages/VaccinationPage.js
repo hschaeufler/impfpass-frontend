@@ -78,7 +78,8 @@ function VaccinationPage(props) {
                     <VaccinationClaimDialog onClose={handleDialogClose}></VaccinationClaimDialog>}
                 </Route>
                 <Route path={RoutesConstants.VACCINATION_PATH_WITH_ID} exact>
-                    <VaccinationDetailDialog vaccinationId={id} onClose={handleDialogClose}></VaccinationDetailDialog>
+                    {id &&
+                    <VaccinationDetailDialog vaccinationId={id} onClose={handleDialogClose}></VaccinationDetailDialog>}
                 </Route>
             </Switch>
         </VaccinationPageTemplate>)

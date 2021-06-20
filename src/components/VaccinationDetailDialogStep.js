@@ -17,22 +17,19 @@ function VaccinationDetailDialogStep(props) {
 
     const {authToken} = useContext(AuthContext);
 
-    async function loadVaccination() {
-        try {
-            const vaccinationObj = await VaccinationService.getVaccination(authToken, vaccinationId);
-            setVaccination(vaccinationObj);
-        } catch (exception) {
-            console.log(exception);
-            setError(exception);
-        }
-    }
-
-
     useEffect(() => {
+        async function loadVaccination() {
+            try {
+                const vaccinationObj = await VaccinationService.getVaccination(authToken, vaccinationId);
+                setVaccination(vaccinationObj);
+            } catch (exception) {
+                console.log(exception);
+                setError(exception);
+            }
+        }
+
         loadVaccination();
     }, []);
-
-
 
 
     function handleClose() {

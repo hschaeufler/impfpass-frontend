@@ -5,9 +5,9 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 
 
-function CustomAppBar(props){
+function CustomAppBar(props) {
 
-    return(<AppBar position="static" {...props}>
+    return (<AppBar position="static" {...props}>
         <Toolbar>
             <LocalHospitalIcon fontSize="large"></LocalHospitalIcon>
             <Typography align="center" component="h1" variant="h6">VacBook</Typography>

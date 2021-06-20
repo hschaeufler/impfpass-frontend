@@ -1,7 +1,6 @@
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import VaccinationTable from "./VaccinationTable";
 import UserRoleArray from "../enum/UserRoleArray";
 import UserRole from "../enum/UserRole";
 import PropTypes from "prop-types"

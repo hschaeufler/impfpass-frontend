@@ -17,7 +17,7 @@ function VaccinationDetailDialog(props) {
     return (
         <SimpleDialog {...props} title={"Vaccination Detail"}>
             {vaccinationId && <VaccinationDetailDialogStep onClose={handleClose}
-                                         vaccinationId={vaccinationId}></VaccinationDetailDialogStep>}
+                                                           vaccinationId={vaccinationId}></VaccinationDetailDialogStep>}
         </SimpleDialog>
     );
 }

@@ -115,12 +115,11 @@ function SignUpComponent(props) {
                     required
                     fullWidth
                     label="First Name"
-                    autofocus
+                    autoFocus
                     id="firstName"
                     onChange={handleChange}
                     value={user.firstName}
-                    error={showError && !user.firstName}
-                    autocomplete>
+                    error={showError && !user.firstName}>
                 </TextField>
                 <TextField
                     variant="outlined"
@@ -131,8 +130,7 @@ function SignUpComponent(props) {
                     onChange={handleChange}
                     value={user.lastName}
                     error={showError && !user.lastName}
-                    id="lastName"
-                    autocomplete>
+                    id="lastName">
                 </TextField>
                 <TextField
                     variant="outlined"
@@ -144,8 +142,7 @@ function SignUpComponent(props) {
                     value={user.mail}
                     error={showError && !user.mail}
                     id="mail"
-                    type="email"
-                    autocomplete>
+                    type="email">
                 </TextField>
                 <TextField
                     variant="outlined"

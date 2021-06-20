@@ -12,23 +12,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function QRCode({data,...args}) {
+function QRCode({data, ...args}) {
+
+    const css = useStyles();
 
     const [dataUrl, setDataUrl] = useState(null);
     const [exception, setException] = useState(null);
 
-    useEffect(async () => {
+
+
+    useEffect(() => {
         setException(null);
 
-        try {
-            const qrCodeDataURL = await QRCodeService.createQRCode(data);
-            setDataUrl(qrCodeDataURL);
-        } catch (exception){
-            setException(exception);
+        async function createQRCode() {
+            try {
+                const qrCodeDataURL = await QRCodeService.createQRCode(data);
+                setDataUrl(qrCodeDataURL);
+            } catch (exception) {
+                setException(exception);
+            }
         }
-    },[dataUrl]);
 
-    const css = useStyles();
+        createQRCode();
+    }, [data]);
+
 
     return (<React.Fragment>
         {exception && <Alert severity={"error"}>{exception}</Alert>}

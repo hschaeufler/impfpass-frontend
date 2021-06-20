@@ -17,13 +17,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
-function SimpleDialogTitle({id,titleText,onClose,children,...args}) {
+function SimpleDialogTitle({id, titleText, onClose, children, ...args}) {
 
     const styles = useStyles();
 
-    function handleClick(){
-        if(onClose){
+    function handleClick() {
+        if (onClose) {
             onClose();
         }
     }

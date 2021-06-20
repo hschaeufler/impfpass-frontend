@@ -89,13 +89,12 @@ function LogInComponent(props) {
                     required
                     fullWidth
                     label="Mail"
-                    autofocus
+                    autoFocus
                     id="mail"
                     type="email"
                     error = {showError && !credentials.mail}
                     onChange={handleChange}
-                    value={credentials.mail}
-                    autocomplete>
+                    value={credentials.mail}>
                 </TextField>
                 <TextField
                     variant="outlined"

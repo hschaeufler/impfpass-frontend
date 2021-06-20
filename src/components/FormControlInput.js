@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 function FormControlInput(props) {
 
-    const {id,helperText,...args} = props;
+    const {id, helperText, ...args} = props;
 
     return (<FormControl {...args}>
         <TextField id={id} aria-describedby={id + "helper-text"} {...args}/>
@@ -13,7 +13,7 @@ function FormControlInput(props) {
 }
 
 FormControlInput.propTypes = {
-    id : PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     helperText: PropTypes.string,
     label: PropTypes.string
 }

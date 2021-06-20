@@ -2,7 +2,7 @@ import SimpleDialog from "./SimpleDialog";
 import PropTypes from "prop-types";
 import CameraDialogStep from "./CameraDialogStep";
 import VaccinationClaimDialogStep from "./VaccinationClaimDialogStep";
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 import VaccinationClaimSuccessDialogStep from "./VaccinationClaimSuccessDialogStep";
 
 
@@ -39,12 +39,12 @@ function VaccinationClaimDialog(props) {
     return (
         <SimpleDialog {...args} onClose={handleClose} title={"Camera"}>
             {(!registrationId && !vaccinationClaim) &&
-                <CameraDialogStep onClose={handleClose} onQRCode={handleQRCode}/>}
+            <CameraDialogStep onClose={handleClose} onQRCode={handleQRCode}/>}
             {(registrationId && !vaccinationClaim) &&
-                <VaccinationClaimDialogStep onClose={handleClose} registrationId={registrationId}
+            <VaccinationClaimDialogStep onClose={handleClose} registrationId={registrationId}
                                         onVaccinationClaim={handleVaccinationClaim}/>}
             {(registrationId && vaccinationClaim) &&
-                <VaccinationClaimSuccessDialogStep vaccinationClaim={vaccinationClaim}
+            <VaccinationClaimSuccessDialogStep vaccinationClaim={vaccinationClaim}
                                                onClose={handleClose}></VaccinationClaimSuccessDialogStep>}
         </SimpleDialog>
     );

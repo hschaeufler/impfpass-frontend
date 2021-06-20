@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React from "react";
 import LogInComponent from "../components/LogInComponent";
 import FrontTemplate from "../templates/FrontTemplate";
 import useAuth from "../hooks/useAuth";
@@ -10,7 +10,7 @@ function LogInPage(props) {
     const {login} = useAuth();
 
     async function handleLogin(mail, username) {
-        await login(mail,username)
+        await login(mail, username)
         history.push("/");
     }
 

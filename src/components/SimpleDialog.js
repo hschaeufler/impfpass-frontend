@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 
 
 function SimpleDialog(props) {
-    const {id, title, onClose,...args} = props;
+    const {id, title, onClose, ...args} = props;
     const theme = useTheme();
 
     const [open, setOpen] = useState(true);

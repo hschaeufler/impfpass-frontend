@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import SimpleDialogStep from "./SimpleDialogStep";
-import PropTypes, {func} from "prop-types";
+import PropTypes from "prop-types";
 import VaccinationService from "../services/VaccinationService";
 import AuthContext from "../context/AuthContext";
 import FormControlInput from "./FormControlInput";

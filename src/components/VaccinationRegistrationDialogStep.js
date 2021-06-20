@@ -74,16 +74,19 @@ function VaccinationRegistrationDialogStep(props) {
         return vaccination.vaccine && vaccination.disease && vaccination.chargeNumber;
     }
 
-    useEffect(async () => {
-        const vaccineList = await VaccineService.getVaccines(authToken);
-        setVaccines(vaccineList);
-        const diseaseList = _.map(_.uniqBy(vaccineList, "disease"), "disease");
-        setDiseases(diseaseList);
+    useEffect(() => {
+        async function getVaccines() {
+            const vaccineList = await VaccineService.getVaccines(authToken);
+            setVaccines(vaccineList);
+            const diseaseList = _.map(_.uniqBy(vaccineList, "disease"), "disease");
+            setDiseases(diseaseList);
+        }
 
+        getVaccines();
     }, []);
 
     const dialogActions = <Button autoFocus size="large" onClick={handleSubmit} variant="contained"
-                                   color="primary">Submit</Button>;
+                                  color="primary">Submit</Button>;
 
     return (
         <SimpleDialogStep onClose={handleClose}

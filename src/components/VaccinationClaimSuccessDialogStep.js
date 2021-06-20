@@ -4,12 +4,7 @@ import PropTypes from "prop-types";
 import FormControlInput from "./FormControlInput";
 import Alert from "@material-ui/lab/Alert";
 
-const {DateTime} = require("luxon");
-
-
-function VaccinationClaimSuccessDialogStep({vaccinationClaim,onClose}) {
-
-    const dateTimeFormat = "dd.MM.yyyy HH:mm:ss";
+function VaccinationClaimSuccessDialogStep({vaccinationClaim, onClose}) {
 
     function handleClose() {
         if (onClose) {
@@ -18,7 +13,7 @@ function VaccinationClaimSuccessDialogStep({vaccinationClaim,onClose}) {
     }
 
     return (
-        <SimpleDialogStep>
+        <SimpleDialogStep  onClose={handleClose}>
             <FormControlInput
                 id="registrationId"
                 label="Registration Id"
